@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cleran_architecture_demo.iml" filepath="$PROJECT_DIR$/cleran_architecture_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/cleran_architecture_demo_android.iml" filepath="$PROJECT_DIR$/android/cleran_architecture_demo_android.iml" />
+    </modules>
+  </component>
+</project>

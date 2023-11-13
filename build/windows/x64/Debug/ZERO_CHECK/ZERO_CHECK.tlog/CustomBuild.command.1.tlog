@@ -1,0 +1,10 @@
+^C:\FLUTTER_PROJECTS\CLERAN_ARCHITECTURE_DEMO\BUILD\WINDOWS\CMAKEFILES\BDAFA0283A7FDEC8A73F2373F7B1A388\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/flutter_projects/cleran_architecture_demo/windows -BC:/flutter_projects/cleran_architecture_demo/build/windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/flutter_projects/cleran_architecture_demo/build/windows/cleran_architecture_demo.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
