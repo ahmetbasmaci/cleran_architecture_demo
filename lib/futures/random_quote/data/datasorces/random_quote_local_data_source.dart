@@ -15,7 +15,7 @@ class RandomQuoteLocalDataSourceImpl implements RandomQuoteLocalDataSource {
   RandomQuoteLocalDataSourceImpl({required this.localStorage});
   @override
   Future<QuoteModel> getRandomQuote() {
-    String quoteJson = localStorage.read(AppStrings.chachedRandomQuote.name) ?? "";
+    String quoteJson = localStorage.read(StorageKeys.chachedRandomQuote) ?? "";
     if (quoteJson != '') {
       QuoteModel quote = QuoteModel.fromJson(json.decode(quoteJson));
       return Future.value(quote);
@@ -27,7 +27,7 @@ class RandomQuoteLocalDataSourceImpl implements RandomQuoteLocalDataSource {
   @override
   Future<void> cacheRandomQuote(QuoteModel quote) {
     String quoteJson = json.encode(quote.toJson());
-    localStorage.write(AppStrings.chachedRandomQuote.name, quoteJson);
+    localStorage.write(StorageKeys.chachedRandomQuote, quoteJson);
     return Future.value();
   }
 }

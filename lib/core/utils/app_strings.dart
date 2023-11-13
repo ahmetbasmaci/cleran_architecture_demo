@@ -12,13 +12,17 @@ enum AppStrings {
   contentType,
   applicationJson,
   fontFamily,
-  chachedRandomQuote,
   randomQuotePageIsWorking,
   randomQuotePage,
   homePage,
-  languages
+  languages,
+  theme,
 }
 
+class StorageKeys {
+  static const String themeDataIndex = "THEME_DATA_INDEX";
+  static const String chachedRandomQuote = 'CHACHED_RANDOM_QUOTE';
+}
 
 
 

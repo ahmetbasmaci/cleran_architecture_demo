@@ -1,13 +1,12 @@
 import 'package:cleran_architecture_demo/config/locale/app_local.dart';
-import 'package:cleran_architecture_demo/config/themes/app_theme.dart';
 import 'package:cleran_architecture_demo/core/utils/app_strings.dart';
 import 'package:cleran_architecture_demo/futures/home_page/home_page.dart';
 import 'package:cleran_architecture_demo/futures/localization/presentation/cubit/localization_cubit.dart';
 import 'package:cleran_architecture_demo/futures/random_quote/presentation/cubit/cubit/random_quote_cubit.dart';
+import 'package:cleran_architecture_demo/futures/theme/presentation/cubit/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cleran_architecture_demo/injection_container.dart' as di;
-import 'package:fluttertoast/fluttertoast.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -22,6 +21,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => di.sl<LocalizationCubit>()..getSavedLang(),
         ),
+        BlocProvider(
+          create: (context) => di.sl<ThemeCubit>()..getSavedThemeData(),
+        )
       ],
       child: BlocConsumer<LocalizationCubit, LocalizationState>(
         listener: (context2, state) {
@@ -33,15 +35,23 @@ class MyApp extends StatelessWidget {
         },
         // buildWhen: (previous, current) => previous == current,
         builder: (context, state) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            locale: Locale(context.read<LocalizationCubit>().currentLangCode),
-            supportedLocales: AppLocale.supportedLocales,
-            //  localeResolutionCallback: AppLocale.localeResolutionCallback,
-            localizationsDelegates: AppLocale.localizationsDelegates,
-            title: AppStrings.appName.name,
-            theme: AppTheme.getAppTheme(),
-            home: const HomePage(),
+          return BlocBuilder<ThemeCubit,ThemeState>(
+            builder: (context, state) {
+              if (state is ThemeUpdatedState) {
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  locale: Locale(context.read<LocalizationCubit>().currentLangCode),
+                  supportedLocales: AppLocale.supportedLocales,
+                  //  localeResolutionCallback: AppLocale.localeResolutionCallback,
+                  localizationsDelegates: AppLocale.localizationsDelegates,
+                  title: AppStrings.appName.name,
+                  theme: state.themeData,
+                  home: const HomePage(),
+                );
+              } else {
+                return Container();
+              }
+            },
           );
         },
       ),

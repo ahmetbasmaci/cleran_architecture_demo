@@ -14,6 +14,7 @@ import 'package:cleran_architecture_demo/futures/random_quote/data/repositories/
 import 'package:cleran_architecture_demo/futures/random_quote/data/repositories/quote_repository.dart';
 import 'package:cleran_architecture_demo/futures/random_quote/usecases/get_random_quote.dart';
 import 'package:cleran_architecture_demo/futures/random_quote/presentation/cubit/cubit/random_quote_cubit.dart';
+import 'package:cleran_architecture_demo/futures/theme/presentation/cubit/theme_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -52,6 +53,9 @@ Future<void> _initLocalizationQuoteFuture() async {
         getSavedLangUseCase: GetSavedLangUseCase(langRepository: sl()),
         updateLangUseCase: UpdateLangUseCase(langRepository: sl()),
       ));
+
+  // Bloc
+  sl.registerFactory(() => ThemeCubit(localStorage: sl()));
 }
 
 Future<void> _initRandomQuoteFuture() async {
